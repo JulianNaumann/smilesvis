@@ -2,6 +2,7 @@
 
 # grid images and license key
 *.jpg
+!smiles.jpg
 apikey.txt
 
 
