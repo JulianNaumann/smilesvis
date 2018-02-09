@@ -14,16 +14,20 @@ Requires Python 3 and Chemspider to be installed. To install the chemspider libr
 For access to the ChemSpider database (<https://www.chemspider.com>) you need to obtain your own API key from your profile page (<http://www.chemspider.com/UserProfile.aspx>) and put it into ```apikey.txt```.
 
 
+## Use sample
+To use the provided sample, type ```smilesvis.py ./samples/smiles.txt```
+
+
 ## Usage
 ```
-usage: smilesvis.py [-h] [-v] [--smiles FILE] [--out FILE] [--key API_KEY]
+usage: smilesvis.py [-h] [-v] [--key API_KEY] SMILESFILE
 
 SMILES molecule grid visualizer
+
+positional arguments:
+  SMILESFILE     Grid of smiles strings
 
 optional arguments:
   -h, --help     show this help message and exit
   -v, --verbose  Display download status
-  --smiles FILE  Grid of smiles strings (if not provided, sample file will be loaded)
-  --out FILE     Image of the smiles grid
-  --key API_KEY  ChemSpider API key (if not provided in apikey.txt file)
-```
+  --key API_KEY  ChemSpider API key (if not provided in apikey.txt file)```
