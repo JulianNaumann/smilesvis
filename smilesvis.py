@@ -36,18 +36,24 @@ def stich_image(images, rows, cols):
 
 def download_images(chemspider, smiles_grid, rows, cols, verbose):
     images = [[]]
+    previousQueryResults = {}
     for r in range(rows):
         for c in range(cols):
             if verbose == True:
                 sys.stdout.write('\rDownloading molecule image {} of {}'.format(r * cols + c + 1, rows * cols))
                 sys.stdout.flush()
-            apiqueryresult = chemspider.search(smiles_grid[r][c])
-            if len(apiqueryresult) == 0:
-                images[r].append('')
-                continue
-            url = apiqueryresult[0].image_url
-            bytesimage = requests.get(url).content
-            image = Image.open(BytesIO(bytesimage))
+                
+            if previousQueryResults.get(smiles_grid[r][c]) is None:
+                apiqueryresult = chemspider.search(smiles_grid[r][c])
+                if len(apiqueryresult) == 0:
+                    image = ''
+                else:
+                    url = apiqueryresult[0].image_url
+                    bytesimage = requests.get(url).content
+                    image = Image.open(BytesIO(bytesimage))
+                previousQueryResults[smiles_grid[r][c]] = image
+            else:
+                image = previousQueryResults.get(smiles_grid[r][c])                
             images[r].append(image)
         if r < rows - 1:
             images.append([])
